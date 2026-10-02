@@ -29,7 +29,8 @@ HOW TO USE:
 import numpy as np
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import (
-    accuracy_score, classification_report,
+    accuracy_score, classification_report, precision_score, recall_score,
+    f1_score,
     confusion_matrix, roc_auc_score
 )
 import matplotlib.pyplot as plt
@@ -99,6 +100,9 @@ def evaluate_model(model, X_test, y_test, model_name: str = "Naive Bayes"):
     # Calculate metrics
     accuracy  = accuracy_score(y_test, y_pred)
     auc_roc   = roc_auc_score(y_test, y_pred_proba)
+    spam_precision = precision_score(y_test, y_pred, pos_label=1, zero_division=0)
+    spam_recall = recall_score(y_test, y_pred, pos_label=1, zero_division=0)
+    spam_f1 = f1_score(y_test, y_pred, pos_label=1, zero_division=0)
 
     print(f"\n🎯 Accuracy:  {accuracy:.4f} ({accuracy*100:.2f}%)")
     print(f"🎯 AUC-ROC:   {auc_roc:.4f}")
@@ -110,6 +114,9 @@ def evaluate_model(model, X_test, y_test, model_name: str = "Naive Bayes"):
         'model': model_name,
         'accuracy': accuracy,
         'auc_roc': auc_roc,
+        'spam_precision': spam_precision,
+        'spam_recall': spam_recall,
+        'spam_f1': spam_f1,
     }
 
     return metrics

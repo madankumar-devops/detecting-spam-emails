@@ -24,6 +24,8 @@ setup(
         'seaborn>=0.12.0',
         'joblib>=1.3.0',
         'tqdm>=4.66.0',
+        'mlflow>=3.0,<4',
+        'psutil>=5.9',
     ],
     extras_require={
         'deep_learning': ['tensorflow>=2.13.0'],
