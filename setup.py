@@ -8,7 +8,7 @@ setup(
     name='detecting-spam-emails',
     version='1.0.0',
     description='Spam Email Detection using NLP and Machine Learning',
-    long_description=open('README.md').read(),
+    long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     author='KKR Gen AI Innovations',
     author_email='info@kkrgenaiinnovations.com',
@@ -31,6 +31,7 @@ setup(
         'deep_learning': ['tensorflow>=2.13.0'],
         'visualization': ['wordcloud>=1.9.0'],
         'notebook': ['jupyter>=1.0.0'],
+        'dvc': ['dvc>=3,<4'],
     },
     classifiers=[
         'Development Status :: 4 - Beta',

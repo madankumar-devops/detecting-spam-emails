@@ -204,6 +204,38 @@ python src/utils.py --download-data
 2. Download `spam.csv`
 3. Place it in the `data/` folder
 
+### Versioning the Dataset with DVC
+
+The raw CSV is stored by DVC rather than Git. Git tracks the small pointer file `data/spam.csv.dvc`.
+
+Install the project with its DVC extra, then retrieve the dataset from the configured DVC remote:
+
+```bash
+pip install -e ".[dvc]"
+dvc pull
+```
+
+To track a new or updated dataset version:
+
+```bash
+dvc add data/spam.csv
+git add data/spam.csv.dvc .dvc/config .dvcignore
+git commit -m "Track spam dataset with DVC"
+```
+
+For sharing data between machines, configure a team-approved DVC remote once, then push the data cache:
+
+```bash
+dvc remote add -d storage <remote-storage-uri>
+git add .dvc/config
+dvc push
+git add data/spam.csv.dvc
+git commit -m "Version spam dataset"
+git push
+```
+
+Do not commit cloud credentials. Configure credentials using the storage provider's supported credential mechanism. A remote is not included by default; until one is configured and `dvc push` completes, the dataset is available only in the local DVC cache.
+
 ---
 
 ### ✅ STEP 7: Launch Jupyter Notebook
